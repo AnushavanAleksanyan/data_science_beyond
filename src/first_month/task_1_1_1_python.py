@@ -30,7 +30,11 @@ print(last_digit)
 
 num = input("input a two-digit natural number: ")
 
-digits_sum = int(num)//10 + int(num)%10
+# digits_sum = int(num)//10 + int(num)%10
+
+# print(digits_sum)
+
+digits_sum = int(num[0]) + int(num[1])
 
 print(digits_sum)
 
