@@ -44,10 +44,28 @@ print(is_lucky(ticket))
 
 # task 3
 # Robot
+def move(lst):
+	x, y = 0, 0
+	for step in lst:
+		if step == "up":
+			y += 1
+		elif step == "down":
+			y -= 1
+		elif step == "right":
+			x += 1
+		elif step == "left":
+			x -= 1
+		else:
+			continue
+	return x, y
+
+#goto = ["left", "up", "down", "left", "right", "down", "up", "down", "left", "down", "left", "right", "down"]
+goto = ["left", "up", "left", "up", "left", "up", "left", "up"]
+print(move(goto))
 
 
 
-# task 4 
+# task 4
 # Write a python function, which returns the sum of digits of given number N
 
 def digits_sum(num):
