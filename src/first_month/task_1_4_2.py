@@ -54,9 +54,40 @@ print(combine(l1, l2))
 # Write a python program which gets the maximum and minimum values of a dictionary.
 
 
+def min_max(dict):
+	m = list(dict.values())
+	m.sort()
+	return m[0], m[-1]
+
+d = {1:"one", 2:"two", 5:"five", 10:"ten"}
+print(min_max(d))
+
 # task 6
 # Write a python program which combines 2 dictionaries into one, if there is an element with the same key, appropriate element of combined dict will be an element with that key, and sum of values as value.
 
+def comb2(dict1,dict2):
+	for key in dict2.keys():
+		if key in dict1.keys():
+			dict1[key] +=dict2[key]
+		else:
+			dict1[key] =dict2[key]
+	return dict1
+
+
+d1 = {"a":1, "b":2, "c":3}
+d2 = {"e":11, "c":8, "d":5}
+print(comb2(d1,d2))
 
 # task 7
 # Write a python program which create dict from string, where keys are letters of  string, values are counts of letters in string
+
+def newdict(text):
+	d = {}
+	for let in text:
+		d[let] = text.count(let)
+	return d
+
+
+t = "All string methods returns new values. They do not change the original string."
+
+print(newdict(t))
