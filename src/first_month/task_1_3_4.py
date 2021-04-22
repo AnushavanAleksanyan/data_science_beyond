@@ -43,10 +43,31 @@ print(is_lucky(ticket))
 
 
 # task 3
-# Robot
-def move(lst):
-	x, y = 0, 0
-	for step in lst:
+# Robot | Where will the robot be located after following all the commands?
+
+# def move(lst):
+# 	x, y = 0, 0
+# 	for step in lst:
+# 		if step == "up":
+# 			y += 1
+# 		elif step == "down":
+# 			y -= 1
+# 		elif step == "right":
+# 			x += 1
+# 		elif step == "left":
+# 			x -= 1
+# 		else:
+# 			continue
+# 	return x, y
+
+# #goto = ["left", "up", "down", "left", "right", "down", "up", "down", "left", "down", "left", "right", "down"]
+# goto = ["left", "up", "left", "up", "left", "up", "left", "up"]
+# print(move(goto))
+
+##### v.2
+
+def move(x,y, *args):
+	for step in args:
 		if step == "up":
 			y += 1
 		elif step == "down":
@@ -59,10 +80,9 @@ def move(lst):
 			continue
 	return x, y
 
-#goto = ["left", "up", "down", "left", "right", "down", "up", "down", "left", "down", "left", "right", "down"]
-goto = ["left", "up", "left", "up", "left", "up", "left", "up"]
-print(move(goto))
 
+goto = ["left", "up", "left", "up", "left", "up", "left", "up"]
+print(move(2, 8, *goto))
 
 
 # task 4
