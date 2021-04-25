@@ -16,7 +16,6 @@ class Money():
 
 
 
-
 def main():
 	x = Money(11, "USD")
 	y = Money(5, "USD")
