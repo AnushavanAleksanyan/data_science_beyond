@@ -5,11 +5,13 @@ class Money():
 		self.amount = amount
 		self.currency = currency
 	def print_obj(self):
-		print(self.amount, self.currency)
+		return f"{self.amount} {self.currency}"
 	def sum(self, other):
-		return self.amount + other.amount
+		obj = Money(self.amount+other.amount, self.currency)
+		return obj
 	def sub(self, other):
-		return self.amount - other.amount
+		obj = Money(self.amount-other.amount, self.currency)
+		return obj
 
 
 
@@ -17,9 +19,10 @@ class Money():
 def main():
 	x = Money(11, "USD")
 	y = Money(5, "USD")
-	x.print_obj()
-	y.print_obj()
-	print(x.sum(y))
-	print(x.sub(y))
+	print(x.print_obj())
+	print(y.print_obj())
+	print(x.sum(y).print_obj())
+	print(x.sub(y).print_obj())
+	#print(x+y)
 
 main()
