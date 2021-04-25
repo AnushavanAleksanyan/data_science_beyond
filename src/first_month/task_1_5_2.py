@@ -1,6 +1,5 @@
 class Money():
-	amount = 100
-	currency = "USD"
+	rates = {"USD": 523, "EUR": 631, "RUB": 7.05, "AMD":1}
 	def __init__(self, amount, currency):
 		self.amount = amount
 		self.currency = currency
@@ -9,6 +8,8 @@ class Money():
 	def sum(self, other):
 		obj = Money(self.amount+other.amount, self.currency)
 		return obj
+	def change(self):
+		return f"{self.amount*self.rates[self.currency]} AMD"
 	def sub(self, other):
 		obj = Money(self.amount-other.amount, self.currency)
 		return obj
@@ -23,6 +24,6 @@ def main():
 	print(y.print_obj())
 	print(x.sum(y).print_obj())
 	print(x.sub(y).print_obj())
-	#print(x+y)
+	print(x.change())
 
 main()
