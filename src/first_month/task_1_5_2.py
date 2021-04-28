@@ -8,8 +8,9 @@ class Money():
 	def sum(self, other):
 		obj = Money(self.amount+other.amount, self.currency)
 		return obj
-	def change(self):
-		return f"{self.amount*self.rates[self.currency]} AMD"
+	def change(self, rate):
+		obj = Money(self.amount*self.rates[self.currency]/self.rates[rate], rate)
+		return obj
 	def sub(self, other):
 		obj = Money(self.amount-other.amount, self.currency)
 		return obj
@@ -17,12 +18,13 @@ class Money():
 
 
 def main():
-	x = Money(11, "USD")
+	x = Money(10, "USD")
 	y = Money(5, "USD")
+	z = Money(10, 'EUR')
 	print(x.print_obj())
 	print(y.print_obj())
 	print(x.sum(y).print_obj())
 	print(x.sub(y).print_obj())
-	print(x.change())
+	print(z.change("USD").print_obj())
 
 main()
