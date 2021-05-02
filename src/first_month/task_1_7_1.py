@@ -33,8 +33,8 @@ class Student(Person):
 	def get_university():
 		return self.university
 
-	def __repr__(self):
-		return f"{super().__repr__()}, studies in {self.university}"
+	# def __repr__(self):
+	# 	return f"{self.name.title()} {self.surname.title()} - {self.gender.title()}, {self.age} years old, studies in {self.university}"
 
 
 
