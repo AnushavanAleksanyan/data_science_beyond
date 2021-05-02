@@ -93,7 +93,6 @@ class Rational:
 
 
 
-
 a = Rational(100,20)
 b = Rational(25,5)
 
