@@ -1,17 +1,23 @@
 class Rational:
 	def __init__(self, x, y):
-		self.numerator = x
-		self.denumerator = y
+		if x>0 or y>0:
+			self.numerator = x
+			self.denumerator = y
+		else:
+			raise SyntaxError("numerator and denumerator must be greater than 0")
+		self.z = self.gcd(self.numerator, self.denumerator)
 
-	def gcd(self, a, b):
-		while a != 0 and b != 0:
+	@staticmethod
+	def gcd(a, b):
+		while a > 0 and b > 0:
 			if a > b:
 				a = a % b
 			else:
 				b = b % a
 		return a+b
 
-	def lcm(self, a, b):
+	@staticmethod
+	def lcm(a, b):
 		great = 1
 		if a>b:
 			if a > b:
@@ -26,32 +32,27 @@ class Rational:
 		return lcm
 
 	def __repr__(self):
-		z = self.gcd(self.numerator, self.denumerator)
-		return str(self.numerator//z) +" / "+ str(self.denumerator//z)
+		return str(self.numerator//self.z) +" / "+ str(self.denumerator//self.z)
 
 	def	__add__(self, other):
-		z = self.gcd(self.numerator, self.denumerator)
-		lcm = self.lcm(self.numerator, self.denumerator)
+		lcm = lcm(self.numerator, self.denumerator)
 		x = lcm//self.denumerator*self.numerator+lcm//other.denumerator*other.numerator
-		return Rational(x//z, lcm//z)
+		return Rational(x//self.z, lcm//self.z)
 
 	def	__sub__(self, other):
-		z = self.gcd(self.numerator, self.denumerator)
 		lcm = self.lcm(self.numerator, self.denumerator)
 		x = lcm//self.denumerator*self.numerator-lcm//other.denumerator*other.numerator
-		return Rational(x//z, lcm//z)
+		return Rational(x//self.z, lcm//self.z)
 
 	def	__mul__(self, other):
-		z = self.gcd(self.numerator, self.denumerator)
 		x = self.numerator * other.numerator
 		y = self.denumerator * other.denumerator
-		return Rational(x//z, y//z)
+		return Rational(x//self.z, y//self.z)
 
 	def	__div__(self, other):
-		z = self.gcd(self.numerator, self.denumerator)
 		x = self.numerator * other.denumerator
 		y = self.denumerator * other.numerator
-		return Rational(x//z, y//z)
+		return Rational(x//self.z, y//self.z)
 
 	def	__eq__(self, other):
 		i = self.gcd(self.numerator, self.denumerator)
@@ -93,14 +94,14 @@ class Rational:
 
 
 
-a = Rational(100,20)
-b = Rational(25,5)
+a = Rational(1,2)
+b = Rational(3,4)
 
 print(a+b)
 print(a-b)
 print(a*b)
 print(a==b)
-print(a>=b)
+print(b)
 
 
 
