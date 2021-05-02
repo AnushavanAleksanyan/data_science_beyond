@@ -1,3 +1,6 @@
+from task_1_5_2 import Money
+
+
 class Person():
 	gender=("Male", "Female")
 	def __init__(self, name: str, surname: str, age: int, gender: str):
@@ -24,19 +27,25 @@ class Student(Person):
 	def get_score(self):
 		return self.middle_score
 
-	def get_course():
+	def get_course(self):
 		return self.course
 
-	def get_faculty():
+	def get_faculty(self):
 		return self.faculty
 
-	def get_university():
+	def get_university(self):
 		return self.university
 
-	# def __repr__(self):
-	# 	return f"{self.name.title()} {self.surname.title()} - {self.gender.title()}, {self.age} years old, studies in {self.university}"
+	def __repr__(self):
+		return f"{self.name.title()} {self.surname.title()} - {self.gender.title()}, {self.age} years old, studies in {self.university}"
 
 
+class Teacher(Person):
+	def __init__(self, name: str, surname: str, age: int, gender: str, university: str, faculty: str, discipline: int, experience: int, salery: money):
+		super().__init__(name, surname, age, gender)
+
+	def get_discipline(self):
+		pass
 
 p_1 = Person("Steve", "Wonder", 26, "Male")
 #print(p_1)
