@@ -34,8 +34,7 @@ class Student(Person):
 		return self.university
 
 	def __repr__(self):
-		super().__repr__(name, surname, age, gender)
-		return f"{self.name.title()} {self.surname.title()} - {self.gender.title()}, {self.age} years old, studies in {self.university}"
+		return f"{super().__repr__()}, studies in {self.university}"
 
 
 
