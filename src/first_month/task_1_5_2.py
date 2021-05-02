@@ -3,7 +3,7 @@ class Money():
 	def __init__(self, amount, currency):
 		self.amount = amount
 		self.currency = currency
-	def print_obj(self):
+	def __repr__(self):
 		return f"{self.amount} {self.currency}"
 	def sum(self, other):
 		obj = Money(self.amount+other.amount, self.currency)
@@ -21,10 +21,10 @@ def main():
 	x = Money(10, "USD")
 	y = Money(5, "USD")
 	z = Money(10, 'EUR')
-	print(x.print_obj())
-	print(y.print_obj())
-	print(x.sum(y).print_obj())
-	print(x.sub(y).print_obj())
-	print(z.change("USD").print_obj())
+	# print(x.print_obj())
+	# print(y.print_obj())
+	# print(x.sum(y).print_obj())
+	# print(x.sub(y).print_obj())
+	#print(z.change("USD").print_obj())
 
 main()

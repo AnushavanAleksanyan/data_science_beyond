@@ -41,14 +41,41 @@ class Student(Person):
 
 
 class Teacher(Person):
-	def __init__(self, name: str, surname: str, age: int, gender: str, university: str, faculty: str, discipline: int, experience: int, salery: money):
+	def __init__(self, name: str, surname: str, age: int, gender: str, university: str, faculty: str, discipline: int, experience: int, salery: Money):
 		super().__init__(name, surname, age, gender)
+		self.university = university
+		self.faculty = faculty
+		self.discipline = discipline
+		self.experience = experience
+		self.salery = salery
 
 	def get_discipline(self):
-		pass
+		return self.discipline
+
+	def get_faculty(self):
+		return self.faculty
+
+	def get_university(self):
+		return self.university
+
+	def get_experience(self):
+		return self.experience
+
+	def get_salary(self):
+		return self.salery
+
+	def __repr__(self):
+		return f"{self.name.title()} {self.surname.title()} - {self.gender.title()}, {self.age} years old, experience: {self.experience}, salery is {self.salery}"
+
+
 
 p_1 = Person("Steve", "Wonder", 26, "Male")
 #print(p_1)
 
 s_1 = Student("Steve", "Wonder", 26, "Male", "ASUE", "Management", 2, 9)
-print(s_1)
+#print(s_1.get_faculty())
+
+salery = Money(1000, "USD").change("AMD")
+
+t_1 = Teacher("Barry", "White", 31, "Male", "ASUE", "Management", "Municipal management", "5", 1000)
+print(t_1)
