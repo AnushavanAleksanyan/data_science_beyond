@@ -47,7 +47,7 @@ class Teacher(Person):
 		self.faculty = faculty
 		self.discipline = discipline
 		self.experience = experience
-		self.salery = salery
+		self.salery = Money(salery, "USD").change("AMD")
 
 	def get_discipline(self):
 		return self.discipline
@@ -75,7 +75,7 @@ p_1 = Person("Steve", "Wonder", 26, "Male")
 s_1 = Student("Steve", "Wonder", 26, "Male", "ASUE", "Management", 2, 9)
 #print(s_1.get_faculty())
 
-salery = Money(1000, "USD").change("AMD")
+#salery = Money(1000, "USD").change("AMD")
 
 t_1 = Teacher("Barry", "White", 31, "Male", "ASUE", "Management", "Municipal management", "5", 1000)
 print(t_1)
