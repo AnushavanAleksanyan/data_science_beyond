@@ -1,12 +1,32 @@
-class Rational:
-	def __init__(self, x, y):
-		self.z = self.gcd(self.numerator, self.denumerator)
-		if x>0 or y>0:
-			self.numerator = x//self.z
-			self.denumerator = y
-		else:
-			raise SyntaxError("numerator and denumerator must be greater than 0")
+class ZeroError(Exception):
+	def __init__(self, err_text):
+		self.err_text = err_text
+	def print_obj(self):
+		print(self.err_text)
 
+class MyTypeError(Exception):
+	def __init__(self, error):
+		self.error = error
+	def __repr__(self):
+		return(self.error)
+
+
+class Rational:
+	def __init__(self, numerator, denumerator):
+		try:
+			if not (isinstance(numerator, int) and isinstance(denumerator, int)):
+				raise MyTypeError("wrong type")
+		except MyTypeError as mte:
+			print(mte)
+		else:
+			try:
+				if denumerator==0:
+					raise ZeroError("Can't devide to zero")
+			except ZeroError as ze:
+				ze.print_obj()
+			else:
+				self.numerator = numerator
+				self.denumerator = denumerator
 
 	@staticmethod
 	def gcd(a, b):
@@ -18,93 +38,98 @@ class Rational:
 		return a+b
 
 	@staticmethod
-	def find_lcm(a, b):
-		if a > b:
-			great = a
-		else:
-			great = b
-		while True:
-			if great % a ==0 and great % b ==0:
-				lcm = great
-				break
-			great +=1
-		return lcm
-
-	@staticmethod
-	def normalize(c):
-		return c//self.z
+	def normalize(num, numer, denumer):
+		return num//Rational.gcd(numer,denumer)
 
 	def __repr__(self):
-		return str(self.numerator) +" / "+ str(self.denumerator)
+		numerator = self.normalize(self.numerator,self.numerator,self.denumerator)
+		denumerator = self.normalize(self.denumerator,self.numerator,self.denumerator)
+		return str(numerator) +" / "+ str(denumerator)
 
 	def	__add__(self, other):
-		lcm = self.find_lcm(self.denumerator, other.denumerator)
-		x = lcm//self.denumerator*self.numerator+lcm//other.denumerator*other.numerator
-		return Rational(x//self.z,lcm//self.z)
+		x = self.numerator * other.denumerator+self.denumerator*other.numerator
+		y = self.denumerator*other.denumerator
+		try:
+			if y==0:
+				raise ZeroError("Can't devide to zero")
+		except ZeroError as ze:
+			ze.print_obj()
+		else:
+			return Rational(x,y)
 
 	def	__sub__(self, other):
-		lcm = self.lcm(self.numerator, self.denumerator)
-		x = lcm//self.denumerator*self.numerator-lcm//other.denumerator*other.numerator
-		return Rational(x//self.z, lcm//self.z)
+		x = self.numerator * other.denumerator-self.denumerator*other.numerator
+		y = self.denumerator*other.denumerator
+		try:
+			if y==0:
+				raise ZeroError("Can't devide to zero")
+		except ZeroError as ze:
+			ze.print_obj()
+		else:
+			return Rational(x,y)
 
 	def	__mul__(self, other):
 		x = self.numerator * other.numerator
 		y = self.denumerator * other.denumerator
-		return Rational(x//self.z, y//self.z)
+		try:
+			if y==0:
+				raise ZeroError("Can't devide to zero")
+		except ZeroError as ze:
+			ze.print_obj()
+		else:
+			return Rational(x,y)
 
 	def	__div__(self, other):
-		x = self.numerator * other.denumerator
-		y = self.denumerator * other.numerator
-		return Rational(x//self.z, y//self.z)
+		x = self.numerator / other.denumerator
+		y = self.denumerator / other.numerator
+		try:
+			if y==0:
+				raise ZeroError("Can't devide to zero")
+		except ZeroError as ze:
+			ze.print_obj()
+		else:
+			return Rational(x,y)
 
 	def	__eq__(self, other):
-		i = self.gcd(self.numerator, self.denumerator)
-		j = self.gcd(other.numerator, other.denumerator)
-		if self.numerator/i == other.numerator/j and self.denumerator/i == other.denumerator/j:
+
+		if self.numerator * other.denumerator == self.denumerator * other.numerator:
 			return True
 		else:
 			return False
 
 	def	__gt__(self, other):
-		lcm = self.lcm(self.numerator, self.denumerator)
-		if lcm//self.denumerator*self.numerator>lcm//other.denumerator*other.numerator:
+		if self.numerator*other.denumerator>self.denumerator*other.numerator:
 			return True
 		else:
 			return False
 
 	def	__ge__(self, other):
-		lcm = self.lcm(self.numerator, self.denumerator)
-		if lcm//self.denumerator*self.numerator>=lcm//other.denumerator*other.numerator:
+		if self.numerator*other.denumerator>=self.denumerator*other.numerator:
 			return True
 		else:
 			return False
 
 	def	__lt__(self, other):
-		lcm = self.lcm(self.numerator, self.denumerator)
-		if lcm//self.denumerator*self.numerator<lcm//other.denumerator*other.numerator:
+		if self.numerator*other.denumerator<self.denumerator*other.numerator:
 			return True
 		else:
 			return False
 
-	def	__lte__(self, other):
-		lcm = self.lcm(self.numerator, self.denumerator)
-		if lcm//self.denumerator*self.numerator<=lcm//other.denumerator*other.numerator:
+	def	__le__(self, other):
+		if self.numerator*other.denumerator<=self.denumerator*other.numerator:
 			return True
 		else:
 			return False
 
+	def __pow__(self, num):
+		x = self.numerator**num
+		y = self.denumerator**num
+		return Rational(x,y)
 
 
-
-
-a = Rational(25,6)
-b = Rational(1,2)
+a = Rational(2,1)
+b = Rational(1,4)
 
 print(a+b)
-# print(a-b)
-# print(a*b)
-# print(a==b)
-# print(b)
 
-
-
+#print(b)
