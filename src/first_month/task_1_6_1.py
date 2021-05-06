@@ -1,11 +1,12 @@
 class Rational:
 	def __init__(self, x, y):
+		self.z = self.gcd(self.numerator, self.denumerator)
 		if x>0 or y>0:
-			self.numerator = x
+			self.numerator = x//self.z
 			self.denumerator = y
 		else:
 			raise SyntaxError("numerator and denumerator must be greater than 0")
-		self.z = self.gcd(self.numerator, self.denumerator)
+
 
 	@staticmethod
 	def gcd(a, b):
@@ -17,13 +18,11 @@ class Rational:
 		return a+b
 
 	@staticmethod
-	def lcm(a, b):
-		great = 1
-		if a>b:
-			if a > b:
-				great = a
-			else:
-				great = b
+	def find_lcm(a, b):
+		if a > b:
+			great = a
+		else:
+			great = b
 		while True:
 			if great % a ==0 and great % b ==0:
 				lcm = great
@@ -31,13 +30,17 @@ class Rational:
 			great +=1
 		return lcm
 
+	@staticmethod
+	def normalize(c):
+		return c//self.z
+
 	def __repr__(self):
-		return str(self.numerator//self.z) +" / "+ str(self.denumerator//self.z)
+		return str(self.numerator) +" / "+ str(self.denumerator)
 
 	def	__add__(self, other):
-		lcm = lcm(self.numerator, self.denumerator)
+		lcm = self.find_lcm(self.denumerator, other.denumerator)
 		x = lcm//self.denumerator*self.numerator+lcm//other.denumerator*other.numerator
-		return Rational(x//self.z, lcm//self.z)
+		return Rational(x//self.z,lcm//self.z)
 
 	def	__sub__(self, other):
 		lcm = self.lcm(self.numerator, self.denumerator)
@@ -69,7 +72,7 @@ class Rational:
 		else:
 			return False
 
-	def	__gte__(self, other):
+	def	__ge__(self, other):
 		lcm = self.lcm(self.numerator, self.denumerator)
 		if lcm//self.denumerator*self.numerator>=lcm//other.denumerator*other.numerator:
 			return True
@@ -94,14 +97,14 @@ class Rational:
 
 
 
-a = Rational(1,2)
-b = Rational(3,4)
+a = Rational(25,6)
+b = Rational(1,2)
 
 print(a+b)
-print(a-b)
-print(a*b)
-print(a==b)
-print(b)
+# print(a-b)
+# print(a*b)
+# print(a==b)
+# print(b)
 
 
 
