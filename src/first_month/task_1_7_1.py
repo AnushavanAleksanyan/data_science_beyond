@@ -1,12 +1,24 @@
 from task_1_5_2 import Money
 
+class PersonClassError(Exception):
+	def __init__(self, err_text, val):
+		self.err_text = err_text
+		self.val = val
+	def print_obj(self):
+		print(self.err_text, "|", self.val)
 
 class Person():
 	gend=("Male", "Female")
 	def __init__(self, name: str, surname: str, age: int, gender: str):
 		self.__name = name
 		self.__surname = surname
-		self.__age = age
+		try:
+			if age<0:
+				raise PersonClassError("Age is less than 0", age)
+		except PersonClassError as pce:
+			pce.print_obj()
+		else:
+			self.__age = age
 		if not gender.title() in self.gend:
 			print("person's gender should be 'male' or 'female'")
 			raise SyntaxError
@@ -15,6 +27,25 @@ class Person():
 	def __repr__(self):
 		return f"{self.__name.title()} {self.__surname.title()} - {self.__gender.title()}, {self.__age} years old"
 
+	def get_person(self):
+		return self.__name, self.__surname, self.__age, self.__gender
+
+	def set_person(self, data):
+		try:
+			if data[2]<0:
+				raise PersonClassError("Age is less than 0", data[2])
+		except PersonClassError as pce:
+			pce.print_obj()
+		else:
+			self.__name, self.__surname, self.__age, self.__gender = data
+
+	def del_person(self):
+		del self.__name
+		del self.__surname
+		del self.__age
+		del self.__gender
+
+	person_data = property(get_person, set_person, del_person, doc="person properties")
 
 class Student(Person):
 	def __init__(self, name: str, surname: str, age: int, gender: str, university: str, faculty: str, course:int, middle_score: int):
@@ -105,16 +136,17 @@ class Teacher(Person):
 
 
 p_1 = Person("Steve", "Wonder", 26, "Male")
-#print(p_1)
-
-s_1 = Student("Steve", "Wonder", 26, "Male", "ASUE", "Management", 2, 9)
+print(p_1.person_data)
+p_1.person_data = "Elvis", "Presly", -29, "male"
+print(p_1.person_data)
+# s_1 = Student("Steve", "Wonder", 26, "Male", "ASUE", "Management", 2, 9)
 # print(s_1.get_university())
 # s_1.set_university(10)
 # print(s_1.get_university())
 # print(s_1)
 
-t_1 = Teacher("Barry", "White", 31, "Male", "ASUE", "Management", "Municipal management", "5", 1000)
-print(t_1.get_salery())
-t_1.set_salery(1200)
-print(t_1.get_salery())
-print(t_1)
+#t_1 = Teacher("Barry", "White", 31, "Male", "ASUE", "Management", "Municipal management", "5", 1000)
+#print(t_1.get_salery())
+#t_1.set_salery(1200)
+# print(t_1.get_salery())
+# print(t_1)

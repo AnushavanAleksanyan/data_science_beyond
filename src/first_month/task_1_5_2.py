@@ -75,12 +75,12 @@ def main():
 	x = Money(9, "usd")
 	y = Money(5, "USD")
 	z = Money(10, 'EUR')
-	print(x.amount)
-	x.amount = -10
-	print(x.amount)
+	# print(x.amount)
+	# x.amount = -10
+	# print(x.amount)
 	# print(x+y)
 	# print(x.sub(y))
 	# print(z.change("USD").print_obj())
 
 
-main()
+#main()
