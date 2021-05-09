@@ -13,3 +13,4 @@
 ##### 1_4_2 Sets and Dictionaries
 ##### 1_5_2 OOP: Money class
 ##### 1_6_1 OOP: Rational class, Magic function
+##### 1_7_1 OOP: Person class
