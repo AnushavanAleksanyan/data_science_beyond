@@ -31,7 +31,6 @@ class Money():
 		return f"{self.__amount} {self.__currency}"
 
 	def get_amount(self):
-		print("get")
 		return self.__amount
 
 	def set_amount(self, x):
@@ -41,7 +40,6 @@ class Money():
 		except MoneyClassError as me:
 			me.print_obj()
 		else:
-			print("set")
 			self.__amount = x
 
 	def del_amount(self):
@@ -49,6 +47,9 @@ class Money():
 		del self.__amount
 
 	amount = property(get_amount, set_amount, del_amount, doc = "property for amount")
+
+	def get_currency(self)
+		return self.__currency
 
 	def __add__(self, other):
 		obj = Money(self.__amount+other.__amount, self.__currency)

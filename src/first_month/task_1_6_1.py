@@ -44,14 +44,17 @@ class Rational:
 	def get_elems(self):
 		return self.__numerator, self.__denumerator
 
-	def set_elems(self, x):
+	def set_elems(self, x,y):
 		try:
-			if not isinstance(x[0], int):
-				raise RationalClassError("wrong numerator type", x[0])
+			if type(x) != int:
+				raise RationalClassError("wrong numerator type", x)
+			elif type(y) != int:
+				raise RationalClassError("wrong denumerator type", y)
 		except RationalClassError as mte:
 			mte.print_obj()
 		else:
-			self.__numerator, self.__denumerator = x
+			self.__numerator = x
+			self.__denumerator = y
 
 	def del_elems(self):
 		del self.__numerator
@@ -111,9 +114,15 @@ class Rational:
 			return False
 
 	def __pow__(self, num):
-		x = self.__numerator**num
-		y = self.__denumerator**num
-		return Rational(x,y)
+		try:
+			if type(num) != int:
+				raise RationalClassError("wrong multiplicator type", num)
+		except RationalClassError as rce:
+			rce.print_obj()
+		else:
+			x = self.__numerator**int(num)
+			y = self.__denumerator**int(num)
+			return Rational(x,y)
 
 
 a = Rational(5,8)
@@ -121,6 +130,6 @@ b = Rational(1,4)
 
 print(a)
 print(a.elems)
-a.elems = "2",3
+a.elems = 6,3
 print(a.elems)
-print(a==b)
+print(a**"2")
