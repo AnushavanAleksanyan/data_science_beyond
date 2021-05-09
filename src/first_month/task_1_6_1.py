@@ -1,32 +1,29 @@
-class ZeroError(Exception):
-	def __init__(self, err_text):
+class RationalClassError(Exception):
+	def __init__(self, err_text, val):
 		self.err_text = err_text
+		self.val = val
 	def print_obj(self):
-		print(self.err_text)
-
-class MyTypeError(Exception):
-	def __init__(self, error):
-		self.error = error
-	def __repr__(self):
-		return(self.error)
+		print(self.err_text, "|", self.val)
 
 
 class Rational:
 	def __init__(self, numerator, denumerator):
 		try:
-			if not (isinstance(numerator, int) and isinstance(denumerator, int)):
-				raise MyTypeError("wrong type")
-		except MyTypeError as mte:
-			print(mte)
+			if not isinstance(numerator, int):
+				raise RationalClassError("wrong numerator type", numerator)
+			elif not isinstance(denumerator, int):
+				raise RationalClassError("wrong denumerator type", denumerator)
+		except RationalClassError as mte:
+			mte.print_obj()
 		else:
 			try:
 				if denumerator==0:
-					raise ZeroError("Can't devide to zero")
-			except ZeroError as ze:
+					raise RationalClassError("Can't devide to zero", denumerator)
+			except RationalClassError as ze:
 				ze.print_obj()
 			else:
-				self.numerator = numerator
-				self.denumerator = denumerator
+				self.__numerator = self.normalize(numerator, numerator, denumerator)
+				self.__denumerator = self.normalize(denumerator, numerator, denumerator)
 
 	@staticmethod
 	def gcd(a, b):
@@ -42,94 +39,88 @@ class Rational:
 		return num//Rational.gcd(numer,denumer)
 
 	def __repr__(self):
-		numerator = self.normalize(self.numerator,self.numerator,self.denumerator)
-		denumerator = self.normalize(self.denumerator,self.numerator,self.denumerator)
-		return str(numerator) +" / "+ str(denumerator)
+		return str(self.__numerator) +" / "+ str(self.__denumerator)
+
+	def get_elems(self):
+		return self.__numerator, self.__denumerator
+
+	def set_elems(self, x):
+		try:
+			if not isinstance(x[0], int):
+				raise RationalClassError("wrong numerator type", x[0])
+		except RationalClassError as mte:
+			mte.print_obj()
+		else:
+			self.__numerator, self.__denumerator = x
+
+	def del_elems(self):
+		del self.__numerator
+		del self.__denumerator
+
+	elems = property(get_elems, set_elems, del_elems, doc = "property for numerator")
 
 	def	__add__(self, other):
-		x = self.numerator * other.denumerator+self.denumerator*other.numerator
-		y = self.denumerator*other.denumerator
-		try:
-			if y==0:
-				raise ZeroError("Can't devide to zero")
-		except ZeroError as ze:
-			ze.print_obj()
-		else:
-			return Rational(x,y)
+		x = self.__numerator * other.__denumerator+self.__denumerator*other.__numerator
+		y = self.__denumerator*other.__denumerator
+		return Rational(x,y)
 
 	def	__sub__(self, other):
-		x = self.numerator * other.denumerator-self.denumerator*other.numerator
-		y = self.denumerator*other.denumerator
-		try:
-			if y==0:
-				raise ZeroError("Can't devide to zero")
-		except ZeroError as ze:
-			ze.print_obj()
-		else:
-			return Rational(x,y)
+		x = self.__numerator * other.__denumerator-self.__denumerator*other.__numerator
+		y = self.__denumerator*other.__denumerator
+		return Rational(x,y)
 
 	def	__mul__(self, other):
-		x = self.numerator * other.numerator
-		y = self.denumerator * other.denumerator
-		try:
-			if y==0:
-				raise ZeroError("Can't devide to zero")
-		except ZeroError as ze:
-			ze.print_obj()
-		else:
-			return Rational(x,y)
+		x = self.__numerator * other.__numerator
+		y = self.__denumerator * other.__denumerator
+		return Rational(x,y)
 
-	def	__div__(self, other):
-		x = self.numerator / other.denumerator
-		y = self.denumerator / other.numerator
-		try:
-			if y==0:
-				raise ZeroError("Can't devide to zero")
-		except ZeroError as ze:
-			ze.print_obj()
-		else:
-			return Rational(x,y)
+	def	__truediv__(self, other):
+		x = self.__numerator / other.__denumerator
+		y = self.__denumerator / other.__numerator
+		return Rational(x,y)
 
 	def	__eq__(self, other):
 
-		if self.numerator * other.denumerator == self.denumerator * other.numerator:
+		if self.__numerator * other.__denumerator == self.__denumerator * other.__numerator:
 			return True
 		else:
 			return False
 
 	def	__gt__(self, other):
-		if self.numerator*other.denumerator>self.denumerator*other.numerator:
+		if self.__numerator*other.__denumerator>self.__denumerator*other.__numerator:
 			return True
 		else:
 			return False
 
 	def	__ge__(self, other):
-		if self.numerator*other.denumerator>=self.denumerator*other.numerator:
+		if self.__numerator*other.__denumerator>=self.__denumerator*other.__numerator:
 			return True
 		else:
 			return False
 
 	def	__lt__(self, other):
-		if self.numerator*other.denumerator<self.denumerator*other.numerator:
+		if self.__numerator*other.__denumerator<self.__denumerator*other.__numerator:
 			return True
 		else:
 			return False
 
 	def	__le__(self, other):
-		if self.numerator*other.denumerator<=self.denumerator*other.numerator:
+		if self.__numerator*other.__denumerator<=self.__denumerator*other.__numerator:
 			return True
 		else:
 			return False
 
 	def __pow__(self, num):
-		x = self.numerator**num
-		y = self.denumerator**num
+		x = self.__numerator**num
+		y = self.__denumerator**num
 		return Rational(x,y)
 
 
-a = Rational(2,1)
+a = Rational(5,8)
 b = Rational(1,4)
 
-print(a+b)
-
-#print(b)
+print(a)
+print(a.elems)
+a.elems = "2",3
+print(a.elems)
+print(a==b)
