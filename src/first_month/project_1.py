@@ -1,27 +1,30 @@
 class Room:
 	reserved = False
 	room_number = 0
-	count = 0
+	count = {"single":0, "double": 0, "penthouse":0}
 
 	def __init__(self, type:str):
-		self.type = type
+		self.__type = type
+		Room.count[self.__type] += 1
 
 	def __repr__(self):
-		return f"{self.type}, {self.reserved}"
+		return f"{self.__type}, {self.reserved}"
 
 	def get_type(self):
-		return self.type
+		return self.__type
 
 	def get_count(self):
-		return self.count
+		return f"Free {self.count[self.__type]} '{self.__type}' rooms"
 
 	def reserve(self):
-		self.reserved = True
-		Room.count += 1
+		if not self.reserved:
+			self.reserved = True
+			Room.count[self.__type] -= 1
 
 	def checkout(self):
-		self.reserved = False
-		Room.count -= 1
+		if self.reserved:
+			self.reserved = False
+			Room.count[self.__type] += 1
 
 
 class Hotel(Room):
@@ -61,25 +64,28 @@ print(r1)
 r1.reserve()
 print(r1.get_count())
 print(r1)
-print(r1.get_type())
-#r1.checkout()
-print(r1)
+#print(r1.get_type())
+r1.checkout()
+#print(r1)
 print(r1.get_count())
 
 r2 = Room("double")
-r2.reserve()
-print(r2)
+# r2.reserve()
+# print(r2)
 print(r2.get_count())
 
 
-r3 = Room("double")
+# r3 = Room("double")
+# r3.reserve()
+# print(r3.get_count())
 print("*************")
 
 
-h1 = Hotel("MyHotel")
-h1.add_room(r1)
-h1.add_room(r2)
-print(h1.get_rooms())
+# h1 = Hotel("MyHotel")
+# h1.add_room(r1)
+# h1.add_room(r2)
+# print(h1.get_rooms())
+
 # h1.rate(10)
 # h1.rate(3)
 # h1.rate(10)
