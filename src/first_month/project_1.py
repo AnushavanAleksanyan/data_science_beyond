@@ -1,5 +1,5 @@
 class Room:
-	def __init__(self, type:str, count=1):
+	def __init__(self, type:str, count):
 		self.__type = type
 		self.__count = count
 
@@ -10,7 +10,7 @@ class Room:
 		return self.__type
 
 	def get_count(self):
-		return f"Free {self.__count} rooms"
+		return self.__count
 
 	def reserve(self, type, count):
 		if count<=self.__count:
@@ -30,7 +30,6 @@ class Hotel(Room):
 		self.__rater_count = 0
 		self.__rooms = []
 
-
 	def __repr__(self):
 		return f"{self.__name} \nrating - {self.__rating} \nrated {self.__rater_count} people, "
 
@@ -48,7 +47,8 @@ class Hotel(Room):
 		self.__rooms.remove(room)
 
 	def get_rooms(self):
-		return self.__rooms
+		qntty = self.__rooms[0].get_count()
+		return self.__rooms, qntty
 
 	# def reserve(self):
 	# 	super().reserve()
@@ -58,8 +58,8 @@ class Hotel(Room):
 
 
 r1 = Room("single", 5)
-# print(r1)
-# print(r1.get_type())
+print(r1)
+print(r1.get_type())
 # r1.reserve("single", 2)
 # print(r1.get_count())
 # r1.checkout("single", 1)
@@ -68,11 +68,11 @@ r1 = Room("single", 5)
 
 r2 = Room("double", 8)
 # r2.reserve()
-# print(r2)
-#print(r2.get_count())
+print(r2)
+print(r2.get_count())
 
 
-r3 = Room("penthouse", 4)
+# r3 = Room("penthouse", 4)
 # r3.reserve()
 # print(r3.get_count())
 print("*************")
@@ -81,15 +81,15 @@ print("*************")
 h1 = Hotel("MyHotel")
 h1.add_room(r1)
 h1.add_room(r2)
-h1.add_room(r3)
+# h1.add_room(r3)
 print(h1.get_rooms())
 # h1.rate(10)
 # h1.rate(3)
 # print(h1.get_rating())
 
-print(r1.get_count())
-h1.reserve("single", 2)
-print(r1.get_count())
+# print(r1.get_count())
+# h1.reserve("single", 2)
+# print(r1.get_count())
 #print(h1.get_count())
 
 #print(h1)
