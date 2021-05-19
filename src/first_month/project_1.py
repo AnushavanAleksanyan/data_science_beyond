@@ -17,13 +17,13 @@ class Room:
 			self.__count -= count
 		else:
 			print(f"You can only reserve {self.__count} rooms")
-		return Room(self.__type, self.__count)
+		#return Room(self.__type, self.__count)    # to be deleted
 
 	def checkout(self, type, count):
 		self.__count += count
 
 
-class Hotel(Room):
+class Hotel():
 	def __init__(self, name):
 		self.__name = name
 		self.__rating = 0
@@ -47,14 +47,13 @@ class Hotel(Room):
 		self.__rooms.remove(room)
 
 	def get_rooms(self):
-		qntty = self.__rooms[0].get_count()
-		return self.__rooms, qntty
+		return self.__rooms
 
-	# def reserve(self):
-	# 	super().reserve()
+	def reserve(self):
+		pass
 
-	# def checkout(self):
-	# 	pass
+	def checkout(self):
+		pass
 
 
 r1 = Room("single", 5)
@@ -67,7 +66,6 @@ print(r1.get_type())
 #print(r1.get_count())
 
 r2 = Room("double", 8)
-# r2.reserve()
 print(r2)
 print(r2.get_count())
 
