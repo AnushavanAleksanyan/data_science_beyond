@@ -50,7 +50,7 @@ class Hotel():
 		return self.__rooms
 
 	def reserve(self):
-		pass
+		return Room().reserve()
 
 	def checkout(self):
 		pass
@@ -86,7 +86,7 @@ print(h1.get_rooms())
 # print(h1.get_rating())
 
 # print(r1.get_count())
-# h1.reserve("single", 2)
+h1.reserve("single", 2)
 # print(r1.get_count())
 #print(h1.get_count())
 
