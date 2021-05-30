@@ -14,3 +14,11 @@
 ##### 1_5_2 OOP: Money class
 ##### 1_6_1 OOP: Rational class, Magic function
 ##### 1_7_1 OOP: Person class
+#### Project 1
+
+## second month
+#### Exercises
+##### 2_1 Numpy: ndarray, arange
+##### 2_2 Numpy: linear algebra
+##### 2_3 Numpy: array broadcasting 
+##### 2_3 Pandas: Series, DataFrames
