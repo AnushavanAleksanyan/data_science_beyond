@@ -22,3 +22,4 @@
 ##### 2_2 Numpy: linear algebra
 ##### 2_3 Numpy: array broadcasting 
 ##### 2_3 Pandas: Series, DataFrames
+##### 2_4 Pandas: sorting, slicing
