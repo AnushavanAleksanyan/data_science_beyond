@@ -32,8 +32,7 @@ def array_to_series(arr):
 # task_2_4_4
 # Write a Pandas program to convert the first column of a DataFrame as a Series
 def dfcol_to_series(df):
-	data = pd.DataFrame(df)
-	return pd.Series(data.iloc[:,0])
+	return pd.Series(df.iloc[:,0])
 
 
 # task_2_4_5
@@ -44,8 +43,8 @@ def sort_series(ser):
 
 # task_2_4_6
 # Write a Pandas program to select the rows the score is between 15 and 20 (inclusive).
-def slice(ser):
-	pass
+def sliced(ser):
+	return ser.iloc[:][ser[0]<=25][ser[0]>=15]
 
 
 
@@ -78,10 +77,16 @@ def main():
 	"name":["Mike", "Jack", "Joe"],
 	"age":[22,35,14]
 	}
-	print(dfcol_to_series(data))
+	dataf = pd.DataFrame(data)
+	print(dataf)
+	print(dfcol_to_series(dataf))
 
 	# task_2_4_5
-	print(sort_series(dfcol_to_series(data)))
+	print(sort_series(dfcol_to_series(dataf)))
+
+	# task_2_4_6
+	data = pd.DataFrame(np.arange(100).reshape(20,5))
+	print(sliced(data))
 
 
 main()
