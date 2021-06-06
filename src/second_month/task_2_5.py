@@ -4,13 +4,13 @@ import csv
 
 # task_2_5_1
 # Write a Pandas program to display all the records of REGIONS file
-df = pd.read_csv('other/task-2-5/region.csv')
+df = pd.read_csv('other/task-2-5/regions.csv')
 print(df)
 
 
 # task_2_5_2
 # Write a Pandas program to display all the location id from locations file.
-df = pd.read_csv('other/task-2-5/location.csv')
+df = pd.read_csv('other/task-2-5/locations.csv')
 print(df["LOCATION_ID"])
 
 

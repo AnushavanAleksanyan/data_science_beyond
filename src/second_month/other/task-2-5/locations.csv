@@ -20,4 +20,5 @@ LOCATION_ID,STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID,,
 2900,20RuedesCorps-Saints,1730,Geneva,Geneve,CH,,
 3000,Murtenstrasse921,3095,Bern,BE,CH,,
 3100,PieterBreughelstraat837,3029SK,Utrecht,Utrecht,NL,,
-3200,MarianoEscobedo9991,11932,MexicoCity,DistritoFederal,MX,,
+3200,MarianoEscobedo9991,11932,MexicoCity,DistritoFederal,,MX,
+
