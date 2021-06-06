@@ -46,6 +46,7 @@ def sort_series(ser):
 def sliced(ser):
 	return ser.iloc[:][ser[0]<=25][ser[0]>=15]
 
+
 # task_2_4_7
 # Write a Pandas program to calculate the sum of the examination attempts by the students.
 exam_data = {'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'],
