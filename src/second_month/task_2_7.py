@@ -5,17 +5,15 @@ import matplotlib.pyplot as plt
 
 # task_2_7_1
 # Write a Python program to draw a line with suitable label in the x axis, y axis and a title.
-fig = plt.figure()
+fig = plt.figure(figsize=(9, 7))
 ax = fig.add_subplot(3,2,1)
 data = np.sin(np.arange(60))
-# print(data)
 ax.plot(data)
 ax.set_xticks([10,20,30,40,50])
 ax.set_yticks([-2,-1,0,1,2])
 ax.set_xticklabels(['one', "two", "three", "four", "five"], rotation=-45, size = 9)
 ax.set_xlabel("values")
 ax.set_title("sinusoid")
-# plt.show()
 
 
 # task_2_7_2
@@ -33,7 +31,7 @@ bx.tick_params(axis = "x", labelrotation=45)
 # Customized the grid lines with linestyle -, width .5. and color blue.
 data3 = pd.read_csv("other/task-2-7/task_2_7_3.csv", header = None, index_col = 0)
 cx = fig.add_subplot(3,2,3)
-cx.plot(data3,marker='*')
+cx.plot(data3, marker='*')
 cx.tick_params(axis = "x", labelrotation=45)
 cx.grid(lw=0.5, color="blue")
 
@@ -48,16 +46,18 @@ dx.tick_params(axis = "x", labelrotation=45)
 
 
 # task_2_7_5
-#
-
-
-
+# Write a Python programming to create a pie chart of the popularity of programming Languages.
+data5 = data4
+ex = pd.DataFrame.from_dict(data5)
+ex = fig.add_subplot(3,2,5)
+explode = (0, 0.1, 0, 0, 0, 0)
+ex.pie(data5["Popularity"], labels = data4["Programming languages"], explode = explode, shadow = True)
 
 
 
 
 # task_2_7_6
-#
+# Write a Python program to draw a scatter graph taking a random distribution in X and Y and plotted against each other.
 
 
 
@@ -66,5 +66,6 @@ dx.tick_params(axis = "x", labelrotation=45)
 
 
 
-plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=1.0)
+
+plt.tight_layout(pad=0.4, w_pad=2, h_pad=3)
 plt.show()
