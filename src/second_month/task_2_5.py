@@ -17,7 +17,7 @@ print(df["LOCATION_ID"])
 # task_2_5_3
 # Write a Pandas program to extract first 7 records from employees file.
 df = pd.read_csv('other/task-2-5/employees.csv')
-print(df.loc[:6])
+print(df.loc[:7])
 
 
 # task_2_5_4
@@ -31,3 +31,5 @@ print(df["DEPARTMENT_ID"])
 df = pd.read_csv('other/task-2-5/employees.csv')
 colomns = ["FIRST_NAME","LAST_NAME","SALARY","DEPARTMENT_ID"]
 print(df.loc[df["FIRST_NAME"].str.get(0)=="S", colomns])
+
+

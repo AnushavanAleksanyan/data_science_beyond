@@ -11,7 +11,6 @@ def remake(text):
 def write_file(f_name):
 	with open(f"{f_name}.csv", 'a') as file1:
 		file1.write(remake(line))
-		file1.close()
 
 position = 0
 with open('data.csv', 'r') as data:
