@@ -58,7 +58,10 @@ ex.pie(data5["Popularity"], labels = data4["Programming languages"], explode = e
 
 # task_2_7_6
 # Write a Python program to draw a scatter graph taking a random distribution in X and Y and plotted against each other.
-
+x = np.random.randn(15)
+y = np.random.randn(15)
+fx = fig.add_subplot(3,2,6)
+fx.scatter(x, y)
 
 
 
