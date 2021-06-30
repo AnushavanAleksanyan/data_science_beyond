@@ -11,37 +11,6 @@ def mod_data(data)->int:
     else:
         return int(data)
 
-
-# 1. Կարդալ ֆայլը և վերածել դատաֆրեյմի
-file_path = "./other/project-2/Data_Project_2.csv"
-df = pd.read_csv(file_path)
-print(df)
-
-df["number"] = df["number"].apply(mod_data)  # correcting data
-print(df[198:210])
-
-
-## Հեռացրեք այն տողերը, որտեղ հրդեհների քանակը 0 է։ Նախ 0֊ները սարքեք Nan, հետո հեռացրեք
-df["number"].replace(0, np.nan, inplace=True)  # raplace 0 with NaN
-df.dropna(inplace=True) #remove NaN
-
-print(df[198:210])
-
-
-# Խմբավորեք տվյալները ըստ ամիսների։ Արդյունքը լինելու է Series , ընդ որում ամիսները այբբենական կարգով։
-by_months = df.groupby(['month'])['number'].mean()
-print(by_months)
-new_index = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
-by_months = by_months.reindex(new_index)
-print(by_months)
-
-
-# 4. Googletrans գրադարանի միջոցով թարգմանել ամիսները
-def translate_text(txt):
-    translator = googletrans.Translator()
-    translated = translator.translate(txt, src='pt', dest="ru")
-    return translated.text
-
 def translate_text_alt(txt):
 	m = {"Janeiro": "Январь",
 	"Fevereiro": "Февраль",
@@ -57,23 +26,44 @@ def translate_text_alt(txt):
 	"Dezembro": "Декабрь"}
 	return m[txt]
 
+
+# 1. Կարդալ ֆայլը և վերածել դատաֆրեյմի
+file_path = "./other/project-2/Data_Project_2.csv"
+df = pd.read_csv(file_path)
+print(df)
+
+df["number"] = df["number"].apply(mod_data)  # correcting data
+print(df[198:210])
+
+
+## Հեռացրեք այն տողերը, որտեղ հրդեհների քանակը 0 է։ Նախ 0 ները սարքեք Nan, հետո հեռացրեք
+df["number"].replace(0, np.nan, inplace=True)  # raplace 0 with NaN
+df.dropna(inplace=True) #remove NaN
+
+print(df[198:210])
+
+
+# 3. Խմբավորեք տվյալները ըստ ամիսների։ Արդյունքը լինելու է Series , ընդ որում ամիսները
+# այբբենական կարգով։ Փոխեք, ամիսները ըստ ճիշտ հերթականության reindex֊ի միջոցով։
+by_months = df.groupby(['month'])['number'].mean()
+new_index = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+by_months = by_months.reindex(new_index)
+print(by_months)
+
+
+# 4. Googletrans գրադարանի միջոցով թարգմանել ամիսները
+def translate_text(txt):
+    translator = googletrans.Translator()
+    translated = translator.translate(txt, src='pt', dest="ru")
+    return translated.text
+
 print("task 4")
-
-new_index2 = []
-for elem in new_index:
-	new_index2.append(translate_text_alt(elem))
-	#for sub_str in ["месяц", "Месяц", " "]:
-	# print(arm.replace("месяц", "").replace("Месяц", ""))
-	# arm1 = arm.replace(" ", "")
-	#print(arm)
-#print(new_index2)
-
-df["month"] = df["month"].apply(translate_text_alt)
-print(df["month"])
+df["month"] = df["month"].apply(translate_text_alt)  # translates month names
+print(df[198:510])
 
 
 # 5. Վիզուալիզացրեք ստացված տվյալները՝
 # ներկայացնելով կապը ամիսների և այդ ամիսների ընթացքում եղած հրդեհների քանակի հետ
-by_months = by_months.reindex(new_index2)
+print(by_months)
 by_months.plot(kind="bar", x="month", y="number")
 plt.show()
