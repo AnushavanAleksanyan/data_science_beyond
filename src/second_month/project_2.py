@@ -57,6 +57,8 @@ def translate_text_alt(txt):
 	"Dezembro": "Декабрь"}
 	return m[txt]
 
+print("task 4")
+
 new_index2 = []
 for elem in new_index:
 	new_index2.append(translate_text_alt(elem))
@@ -64,7 +66,11 @@ for elem in new_index:
 	# print(arm.replace("месяц", "").replace("Месяц", ""))
 	# arm1 = arm.replace(" ", "")
 	#print(arm)
-print(new_index2)
+#print(new_index2)
+
+df["month"] = df["month"].apply(translate_text_alt)
+print(df["month"])
+
 
 # 5. Վիզուալիզացրեք ստացված տվյալները՝
 # ներկայացնելով կապը ամիսների և այդ ամիսների ընթացքում եղած հրդեհների քանակի հետ
