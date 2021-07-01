@@ -30,40 +30,26 @@ def translate_text_alt(txt):
 # 1. Կարդալ ֆայլը և վերածել դատաֆրեյմի
 file_path = "./other/project-2/Data_Project_2.csv"
 df = pd.read_csv(file_path)
-print(df)
 
 df["number"] = df["number"].apply(mod_data)  # correcting data
-print(df[198:210])
-
 
 ## Հեռացրեք այն տողերը, որտեղ հրդեհների քանակը 0 է։ Նախ 0 ները սարքեք Nan, հետո հեռացրեք
 df["number"].replace(0, np.nan, inplace=True)  # raplace 0 with NaN
 df.dropna(inplace=True) #remove NaN
-
-print(df[198:210])
-
-
-# 3. Խմբավորեք տվյալները ըստ ամիսների։ Արդյունքը լինելու է Series , ընդ որում ամիսները
-# այբբենական կարգով։ Փոխեք, ամիսները ըստ ճիշտ հերթականության reindex֊ի միջոցով։
-by_months = df.groupby(['month'])['number'].mean()
-new_index = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
-by_months = by_months.reindex(new_index)
-print(by_months)
+df["month"] = df["month"].apply(translate_text_alt)  # 4. translates month names
 
 
-# 4. Googletrans գրադարանի միջոցով թարգմանել ամիսները
-def translate_text(txt):
-    translator = googletrans.Translator()
-    translated = translator.translate(txt, src='pt', dest="ru")
-    return translated.text
-
-print("task 4")
-df["month"] = df["month"].apply(translate_text_alt)  # translates month names
-print(df[198:510])
-
-
-# 5. Վիզուալիզացրեք ստացված տվյալները՝
-# ներկայացնելով կապը ամիսների և այդ ամիսների ընթացքում եղած հրդեհների քանակի հետ
-print(by_months)
-by_months.plot(kind="bar", x="month", y="number")
+# 2. Բաժանեք դատան փոքր մասերի՝
+#   * Առաջին բանը, որ կարելի է անել, վիզուալիզացնել հրդեհների քանակը ըստ տարիների, ամիսների
+new_index = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+df1 = df.groupby(['year'])['number'].sum()
+df2 = df.groupby(['month'])['number'].sum()  # 5. ներկայացնել կապը ամիսների և այդ ամիսների ընթացքում եղած հրդեհների քանակի հետ
+df2 = df2.reindex(new_index)  # 3. Փոխեք, ամիսները ըստ ճիշտ հերթականության reindex֊ի միջոցով։
+fig = plt.figure(figsize=(15,4))
+ax1 = fig.add_subplot(1,2,1)
+ax2 = fig.add_subplot(1,2,2)
+ax1.plot(df1)
+ax2.plot(df2)
+ax1.tick_params(axis = "x", labelrotation=45)
+ax2.tick_params(axis = "x", labelrotation=45)
 plt.show()
