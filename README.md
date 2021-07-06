@@ -23,3 +23,8 @@
 ##### 2_3 Numpy: array broadcasting 
 ##### 2_3 Pandas: Series, DataFrames
 ##### 2_4 Pandas: sorting, slicing
+##### 2_5 Pandas: working wwith files, databases
+##### 2_5 Pandas: working wwith files, databases
+##### 2_7 Matplotlib: data visualization
+##### 2_9 Pandas: DateTime
+#### Project 2
