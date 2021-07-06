@@ -45,11 +45,11 @@ new_index = ["Январь", "Февраль", "Март", "Апрель", "Ма
 df1 = df.groupby(['year'])['number'].sum()
 df2 = df.groupby(['month'])['number'].sum()  # 5. ներկայացնել կապը ամիսների և այդ ամիսների ընթացքում եղած հրդեհների քանակի հետ
 df2 = df2.reindex(new_index)  # 3. Փոխեք, ամիսները ըստ ճիշտ հերթականության reindex֊ի միջոցով։
-fig = plt.figure(figsize=(15,4))
+fig = plt.figure(figsize=(12,4))
 ax1 = fig.add_subplot(1,2,1)
+df1.plot.bar(title="Total goals by years.", color = "r")
 ax2 = fig.add_subplot(1,2,2)
-ax1.plot(df1)
-ax2.plot(df2)
+df2.plot.bar(title="Total goals by months.", xlabel = "months")
 ax1.tick_params(axis = "x", labelrotation=45)
 ax2.tick_params(axis = "x", labelrotation=45)
 plt.show()
