@@ -30,5 +30,5 @@
 #### Project 2
 
 ## third month
-##### ML basics
-##### Classification
+##### - ML basics
+##### - Classification
