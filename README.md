@@ -28,3 +28,7 @@
 ##### 2_7 Matplotlib: data visualization
 ##### 2_9 Pandas: DateTime
 #### Project 2
+
+## third month
+##### ML basics
+##### Classification
