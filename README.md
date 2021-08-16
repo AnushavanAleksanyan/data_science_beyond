@@ -32,3 +32,8 @@
 ## third month
 ##### - ML basics
 ##### - Classification
+##### - Linear Regression
+##### - Multiple Linear Regression
+##### - Multivariate Linear Regression
+##### - Support Vector Machine
+##### - Project 3
